@@ -176,7 +176,7 @@ print("\n")
 print("Naive Bayes Algoritması için Sınıflandırma Raporu")
 print(classification_report(Test_Y, predictions_NB))
 
-#SUPPORT VECTOR MACHINE ALGORİTMASI *******************HAZIR KÜTÜPHANE İLE*********************
+#SUPPORT VECTOR MACHINE ALGORİTMASI *********************
 SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
 SVM.fit(Train_X_Tfidf, Train_Y)
 predictions_SVM = SVM.predict(Test_X_Tfidf)
