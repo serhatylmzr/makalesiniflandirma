@@ -147,6 +147,18 @@ word_roots = str(word_roots)
 input = [word_roots]
 test = tfidf_vector.transform(input)
 #**************** TEST MAKALESİNİN HAZIRLIĞI BİTTİ *********************
+def getArticleType(par):
+    case = {
+        0:  "Sanat Makalesi",
+        1:  "Ekonomi Makalesi",
+        2:  "Sağlık Makalesi",
+        3:  "Tarih Makalesi",
+        4:  "Bilim Makalesi",
+        5:  "Spor Makalesi",
+        6:  "Teknoloji Makalesi",
+        7:  "Seyehat Makalesi"
+    }
+    return case.get(par, "Makale bulunamadı")
 #### NAİVE BAYES ALGORİTMASI *************
 
 # Naive Bayes Algoritması
@@ -155,24 +167,7 @@ Naive.fit(Train_X_Tfidf, Train_Y)
 predictions_NB = Naive.predict(Test_X_Tfidf)
 predictions_NB2 = Naive.predict(test)
 
-if predictions_NB2 == [0]:
-    result_naive = "Sanat Makalesi"
-elif predictions_NB2 == [1]:
-    result_naive = "Ekonomi Makalesi"
-elif predictions_NB2 == [2]:
-    result_naive = "Sağlık Makalesi"
-elif predictions_NB2 == [3]:
-    result_naive = "Tarih Makalesi"
-elif predictions_NB2 == [4]:
-    result_naive = "Bilim Makalesi"
-elif predictions_NB2 == [5]:
-    result_naive = "Spor Makalesi"
-elif predictions_NB2 == [6]:
-    result_naive = "Teknoloji Makalesi"
-elif predictions_NB2 == [7]:
-    result_naive = "Seyehat Makalesi"
-
-print("Naive Bayes Algoritmasına göre test verisinin sonucu :", result_naive)
+print("Naive Bayes Algoritmasına göre test verisinin sonucu :", getArticleType(predictions_NB2[0]))
 print("Naive Bayes Algoritması Doğruluk Skoru -> ", accuracy_score(predictions_NB, Test_Y)*100)
 print("\n")
 print("Naive Bayes Algoritması için karmaşıklık matrisi")
@@ -186,25 +181,7 @@ SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
 SVM.fit(Train_X_Tfidf, Train_Y)
 predictions_SVM = SVM.predict(Test_X_Tfidf)
 predictions_SVM2 = SVM.predict(test)
-
-if predictions_SVM2 == [0]:
-    result_svm = "Sanat Makalesi"
-elif predictions_SVM2 == [1]:
-    result_svm = "Ekonomi Makalesi"
-elif predictions_SVM2 == [2]:
-    result_svm = "Sağlık Makalesi"
-elif predictions_SVM2 == [3]:
-    result_svm = "Tarih Makalesi"
-elif predictions_SVM2 == [4]:
-    result_svm = "Bilim Makalesi"
-elif predictions_SVM2 == [5]:
-    result_svm = "Spor Makalesi"
-elif predictions_SVM2 == [6]:
-    result_svm = "Teknoloji Makalesi"
-elif predictions_SVM2 == [7]:
-    result_svm = "Seyehat Makalesi"
-
-print("SVM Algoritmasına göre test verisinin sonucu :", result_svm)
+print("SVM Algoritmasına göre test verisinin sonucu :", getArticleType(predictions_SVM2[0]))
 print("Support Vector Machine Algoritması Doğruluk Skoru -> ", accuracy_score(predictions_SVM, Test_Y)*100)
 print("\n")
 print("Support Vector Machine Algoritması için karmaşıklık matrisi")
